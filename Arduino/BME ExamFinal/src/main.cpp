@@ -16,6 +16,7 @@
   copies or substantial portions of the Software.
 */
 
+// include les libraires 
 #include <Arduino.h>
 #include <WiFi.h>
 #include <HTTPClient.h>
@@ -24,24 +25,23 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_AHTX0.h>
 
-
+// Declaration objet 
 Adafruit_AHTX0 aht;
 
-
+// Connection Wifi 
 const char* ssid = "Ste-adele";
 const char* password = "allo1234";
 
-// Domain Name with full URL Path for HTTP POST Request
+// lien de mon endpoint qui va recevoir les donnees poster 
 const char* serverName = "http://127.0.0.1:8000/postbme/";
 
-
-unsigned long lastTime = 0;
-unsigned long timerDelay = 10000;
+unsigned long lastTime = 0, timerDelay = 5000;
 float Temperature, Humidity; 
-String IDcapteur = "1"; 
 int IDdata = 5 ; 
+String IDcapteur = "1"; 
 
 void setup() {
+
   Serial.begin(9600);
 
   WiFi.begin(ssid, password);
@@ -54,22 +54,21 @@ void setup() {
   Serial.print("Connected to WiFi network with IP Address: ");
   Serial.println(WiFi.localIP());
  
-  
   if (aht.begin()) {
     Serial.println("Found AHT20");
   } else {
     Serial.println("Didn't find AHT20");
   }  
-  
 }
 
 void loop() {
 
-  sensors_event_t humidity, temp;
+  sensors_event_t humidity, temp; 
   aht.getEvent(&humidity, &temp);
 
-  //Send an HTTP POST request every 10 seconds
+  //Send an HTTP POST request every 5 seconds
   if ((millis() - lastTime) > timerDelay) {
+
     //Check WiFi connection status
     if(WiFi.status()== WL_CONNECTED){
       WiFiClient client;
@@ -80,13 +79,15 @@ void loop() {
 
       // If you need an HTTP request with a content type: application/json, use the following:
       http.addHeader("Content-Type", "application/json");
+
       // JSON data to send with HTTP POST
       String httpRequestData = "{\'Capteur\': [\'" + IDcapteur + "\'],\'IDdatabme\': [\'" + String(IDdata) + "\'],\'tmp\': [\'" + String(temp.temperature) + "\'],\'hum\': [\'" + String(humidity.relative_humidity)  + "\']}";           
+      
       // Send HTTP POST request
       Serial.println(httpRequestData);
       int httpResponseCode = http.POST(httpRequestData); // send data 
 
-      IDdata += 1; 
+      IDdata += 1; // incrementation id donnees 
 
       Serial.print("HTTP Response code: ");
       Serial.println(httpResponseCode);

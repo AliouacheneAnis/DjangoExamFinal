@@ -6,9 +6,9 @@ from rest_framework import permissions
 from ExamFinal.serializers import MotorSerializer, BMESerializer
 
 
-# Create your views here.
 
-
+""" views pour handle http post de l'objet qui capte temperature et humidity
+    puis sauvegarder la donnee recu dans la base de donnees """ 
 def postbme(request): 
 
     print(request.POST)
@@ -22,6 +22,8 @@ def postbme(request):
 
     return HttpResponse('<h1>Donnees Sauvegarger avec success</h1>');
 
+""" views pour handle http post de l'objet qui utilise les bouton  
+    puis sauvegarder les donnees recu dans la base de donnees """ 
 def postmotor(request):
     print(request.POST)
     IDcpt2 = request.POST.get("Capteur2")

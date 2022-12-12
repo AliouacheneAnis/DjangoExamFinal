@@ -19,6 +19,7 @@ from django.urls import path
 from ExamFinal import views
 from rest_framework import routers
 
+# Configutation et enregistrement routes Rest API 
 router = routers.DefaultRouter()
 router.register(r'motor', views.MotorViewSet)
 router.register(r'BME', views.BMEViewSet)

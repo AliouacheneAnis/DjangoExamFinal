@@ -1,16 +1,13 @@
 from django.db import models
 
-# Create your models here.
-
-# listings/models.py
-
+# model pour les donnees de temperature 
 class BME(models.Model):
     IDcapteur = models.fields.IntegerField()
     IDdata = models.fields.BigIntegerField()
     tmp = models.fields.FloatField()
     hum = models.fields.FloatField()
 
-
+# model pour le status des boutons
 class Motor(models.Model):
     IDcapteur = models.fields.IntegerField()
     IDdata = models.fields.BigIntegerField()

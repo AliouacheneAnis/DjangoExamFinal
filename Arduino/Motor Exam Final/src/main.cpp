@@ -5,7 +5,6 @@
   Version    : 0.0.1
 */
 
-
 /*
   Rui Santos
   Complete project details at Complete project details at https://RandomNerdTutorials.com/esp32-http-post-ifttt-thingspeak-arduino/ 
@@ -17,6 +16,7 @@
   copies or substantial portions of the Software.
 */
 
+// include libraires 
 #include <Arduino.h>
 #include <WiFi.h>
 #include <HTTPClient.h>
@@ -28,10 +28,11 @@ const char* password = "allo1234";
 // Domain Name with full URL Path for HTTP POST Request
 const char* serverName = "http://127.0.0.1:8000/postmotor/";
 
-const int PIN1 = 4, PIN2 = 5; 
+const int PIN1 = 4, PIN2 = 5; // broche 
+
 int val1 , val2 , val1precedent = 0, Val2Precedent = 0; 
-String IDcapteur = "2"; 
 int IDdata = 3; 
+String IDcapteur = "2"; 
 String Btn1, Btn2; 
 
 void setup() {
@@ -87,8 +88,10 @@ void loop() {
       
       // If you need an HTTP request with a content type: application/json, use the following:
       http.addHeader("Content-Type", "application/json");
+
       // JSON data to send with HTTP POST
       String httpRequestData = "{\'Capteur2\': [\'" + IDcapteur + "\'],\'IDdatamotor\': [\'" + String(IDdata) + "\'],\'btn1\': [\'" +  Btn1 + "\'],\'btn2\': [\'" + Btn2  + "\']}";           
+      
       // Send HTTP POST request
       Serial.println(httpRequestData);
       int httpResponseCode = http.POST(httpRequestData); // send data 
@@ -104,7 +107,6 @@ void loop() {
     else {
       Serial.println("WiFi Disconnected");
     }
-    
     val1precedent = val1; 
     Val2Precedent = val2; 
   }
