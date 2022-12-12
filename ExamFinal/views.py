@@ -9,7 +9,7 @@ from ExamFinal.serializers import MotorSerializer, BMESerializer
 # Create your views here.
 
 
-def postbme(request):
+def postbme(request): 
 
     print(request.POST)
 
@@ -38,6 +38,7 @@ class MotorViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
+    #Recuperer dernier Object 
     queryset = Motor.objects.all().order_by('-id')[:1]
     serializer_class = MotorSerializer
 
@@ -46,5 +47,6 @@ class BMEViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
+    #Recuperer dernier Object 
     queryset = BME.objects.all().order_by('-id')[:1]
     serializer_class = BMESerializer

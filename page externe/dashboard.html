@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <title>Anis Dashboard Django</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta http-equiv="refresh" content="5" />
+      <!-- site css -->
+      <link rel="stylesheet" href="style.css" />
+       <!-- bootstrap -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+      
+      <script> 
+
+         function myFunctionBME(){ 
+            var IDcpt, tmp, hum
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://127.0.0.1:8000/BME/", true);
+            xhr.onload = function(){
+               const myJson = xhr.responseText;
+               MyJson = myJson.substring(1, myJson.length - 1);
+               console.log(MyJson);
+               const myObject = JSON.parse(MyJson);
+
+                IDcpt = myObject.IDcapteur; 
+                tmp = myObject.tmp; 
+                hum = myObject.hum;
+                Data = myObject.IDdata
+
+                document.getElementById("IDCapteur").innerHTML = IDcpt;
+                document.getElementById("tmp").innerHTML = tmp;
+                document.getElementById("hum").innerHTML = hum;
+                document.getElementById("IDdata").innerHTML = Data;
+            };
+            xhr.send();
+         }
+         
+         function myFunctionMotor(){
+            var IDCapteur, Btn1, Btn2
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://127.0.0.1:8000/motor/", true);
+            xhr.onload = function(){
+                const myJson = xhr.responseText;
+                MyJson = myJson.substring(1, myJson.length - 1);
+                console.log(MyJson);
+                const myObject = JSON.parse(MyJson);
+
+                ID = myObject.IDcapteur; 
+                Btn1 = myObject.btn1; 
+                Btn2 = myObject.btn2;
+                Data = myObject.IDdata
+
+                document.getElementById("IDCapteur2").innerHTML = ID;
+                document.getElementById("Btn1").innerHTML = Btn1;
+                document.getElementById("Btn2").innerHTML = Btn2;
+                document.getElementById("IDdata2").innerHTML = Data;
+            };
+            xhr.send();
+         }
+
+         myFunctionBME();
+         myFunctionMotor(); 
+
+        </script>
+
+   </head>
+   <body class="dashboard dashboard_1">
+      <div class="full_container">
+         <div class="inner_container">
+            <div id="content">
+               <div class="midde_cont">
+                  <div class="container-fluid">
+                     <div class="row column_title">
+                        <div class="col-md-12">
+                           <div class="page_title">
+                              <h2>Dashboard</h2>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row column1 social_media_section">
+                        <div class="col-md-12 col-lg-6">
+                           <div class="full socile_icons fb margin_bottom_30">
+                              <div class="social_icon">
+                                 <i class="fa fa-database yellow_color"></i>
+                              </div>
+                              <div class="social_cont">
+                                 <ul>
+                                    <li>
+                                       <span><strong>ID Capteur</strong></span>
+                                       <span id="IDCapteur"><strong></strong></span>
+                                    </li>
+                                    <li>
+                                       <span><strong>ID Data</strong></span>
+                                       <span id="IDdata"><strong></strong></span>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-12 col-lg-6">
+                           <div class="full socile_icons fb margin_bottom_30">
+                              <div class="social_icon">
+                                 <i class="fa fa-database yellow_color"></i>
+                              </div>
+                              <div class="social_cont">
+                                 <ul>
+                                    <li>
+                                       <span><strong>ID Capteur</strong></span>
+                                       <span id="IDCapteur2"><strong></strong></span>
+                                    </li>
+                                    <li>
+                                       <span><strong>ID Data</strong></span>
+                                       <span id="IDdata2"><strong></strong></span>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row column1">
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30">
+                              <div class="couter_icon">
+                                 <div> 
+                                    <img src="temperature-full-solid.svg" style="width:30px;">
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no" id="tmp" style="color: red;"></p>
+                                    <p class="head_couter" style="color: red;">Temperature</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30">
+                              <div class="couter_icon">
+                                 <div> 
+                                    <img src="droplet-solid.svg" style="width:30px;">
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no" id="hum" style="color : blue" ></p>
+                                    <p class="head_couter" style="color : blue" >Humidity</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30">
+                              <div class="couter_icon">
+                                 <div> 
+                                    <img src="toggle-on-solid.svg" style="width:40px;">
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no" id="Btn1"></p>
+                                    <p class="head_couter">Bouton 1</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30">
+                              <div class="couter_icon">
+                                 <div> 
+                                    <img src="toggle-on-solid.svg" style="width:40px;">
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no" id="Btn2"></p>
+                                    <p class="head_couter">Bouton 2</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     </div>
+                  </div>
+         </div>
+      </div>
+   </div>
+   </body>
+</html>
