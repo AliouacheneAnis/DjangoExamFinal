@@ -1,0 +1,29 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+  
+  <form method="POST" action="http://127.0.0.1:8000/post/" >{% csrf_token %}
+    <label for="Capteur1">ID Capteur:</label>
+    <input type="text" id="Capteur1" name="Capteur1"><br>
+    <label for="tmp">Temperature:</label>
+    <input type="text" id="tmp" name="tmp"><br>
+    <label for="hum">Humidity:</label>
+    <input type="text" id="hum" name="hum"><br>
+
+    <label for="Capteur2">ID Capteur:</label>
+    <input type="text" id="Capteur2" name="Capteur2"><br>
+    <label for="btn1">Bouton 1:</label>
+    <input type="text" id="btn1" name="btn1"><br>
+    <label for="btn2">Bouton 2:</label>
+    <input type="text" id="btn2" name="btn2"><br>
+
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
